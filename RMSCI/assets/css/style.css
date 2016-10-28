@@ -1,0 +1,371 @@
+﻿/*=============================================================
+    Authour URI: www.binarytheme.com
+    License: Commons Attribution 3.0
+
+    http://creativecommons.org/licenses/by/3.0/
+
+    100% To use For Personal And Commercial Use.
+    IN EXCHANGE JUST GIVE US CREDITS AND TELL YOUR FRIENDS ABOUT US
+   
+    ========================================================  */
+
+
+
+/*=======================================
+    GENERAL STYLES
+==================================================*/
+body {
+          font-family:'Open Sans', sans-serif;
+    font-size:14px;
+}
+
+.nav a {
+    color:#ffffff !important;
+}
+.navbar-header a {
+    color:#ffffff !important;
+    padding-right:100px;
+}
+
+.text-center {
+    text-align:center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family:'Open Sans', sans-serif;
+}
+
+h1 {
+    line-height:80px;
+    font-weight:900;
+    font-size:60px;
+    padding:30px 20px 10px 20px;
+}
+h3 {
+    line-height:30px;
+    padding-bottom:20px;
+}
+h4 {
+    line-height:40px;
+    padding-bottom:40px;
+}
+
+p {
+    font-weight:300;
+    line-height:30px;
+    padding-bottom:20px;
+}
+
+.space-free {
+    height:100px;
+}
+
+.g-pad-bottom {
+    padding-bottom:70px;
+}
+.for-full-back {
+     /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+
+  /* IE 5-7 */
+  filter: alpha(opacity=90);
+
+  /* Netscape */
+  -moz-opacity: 0.9;
+
+  /* Safari 1.x */
+  -khtml-opacity: 0.9;
+
+  /* Good browsers */
+  opacity: 0.9;
+}
+
+section {
+    padding-top:30px;
+	
+}
+
+/*=======================================
+    COLOR CODES
+==================================================*/
+.color-white {
+   background-color:#fff!important;
+}
+.color-dark {
+   background-color:#696969!important;
+}
+
+.color-light {
+   background-color:#E9E9E9!important;
+}
+
+/*=======================================
+    HEADER STYLES
+==================================================*/
+.head-main {
+    font-size:80px !important;
+    font-weight:900!important;
+    color:#fff!important;
+    padding:180px 20px 10px 20px;
+}
+.head-sub-main {
+    font-size:40px !important;
+    font-weight:600!important;
+    color:#fff!important;
+    padding:5px 20px 10px 20px;
+}
+.head-last {
+    font-size:20px !important;
+    font-weight:300!important;
+    color:#fff!important;
+    padding:5px 20px 100px 20px;
+}
+
+/*=======================================
+    NAVIGATION STYLES
+==================================================*/
+
+
+nav {
+	position: absolute;
+	width: 100%;
+    background: #fff;
+    z-index:99;
+}
+
+
+.tab-content{
+    background-color:#303136;
+    color:#fff;
+    padding:5px
+}
+
+.nav-tabs > li > a{
+  border: medium none;
+}
+
+.nav-tabs > li > a:hover{
+	background-color: #303136 !important;
+    
+    color:#fff;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover{
+    background-color: #303136 !important;
+}
+.fixed {
+	position: fixed; 
+	top: 0; 
+	min-height: 50px; 
+	z-index: 99;
+}
+
+
+.navbar-inverse {
+background-color: #3D3D3D;
+border-color: #3D3D3D;
+}
+
+/*=======================================
+    ABOUT TEAM STYLES
+==================================================*/
+
+.team-member {
+    float: center;
+    position: relative;
+    width: 100%;
+}
+.team-member > img {
+    float: center;
+    width: 100%;
+}
+.team-member > h3 {
+    background: rgba(95, 154, 255, 0.85);
+    bottom: 25px;
+    color:#fff;
+    font-size: 20px;
+    letter-spacing: 1px;
+    line-height: 16px;
+    padding: 15px 0;
+    position: absolute;
+    text-align: center;  
+    width: 100%;
+    
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-ms-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+}
+.team-member:hover > h3 {
+    background: #000;
+    bottom: -55px;
+    color: #FFFFFF;	
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-ms-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+}
+
+/*=======================================
+    CONTACT STYLES
+==================================================*/
+
+#social-icon a {
+    color:#616161!important;
+    margin-right:10px;
+}
+.contact-cls {
+    font-size:20px;
+    line-height:40px;
+}
+/*=======================================
+    FOOTER STYLES
+==================================================*/
+
+
+#footer {
+    background-color:#000;
+    color:#fff;
+    padding:20px 50px 20px 50px;
+    text-align:right;
+}
+
+/*=======================================
+OTHER
+==================================================*/
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+
+
+.soflow, select#soflow-color {
+	-webkit-appearance: none;
+	-webkit-appearance: menulist-button;
+	
+    width: 150px;
+	height: 15px;
+	line-height: 90%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: content-box;
+	font-size:11px;
+}
+
+
+
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 0px;
+	color: black;
+	
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+#loading
+{
+display:none;
+
+font-size:18px;
+color: white;
+
+
+}
+
+
+
+input[type=text]{
+    width: 100px;
+	height: 15px;
+	line-height: 90%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: content-box;
+	font-size:12px;
+}
+
+#login-form  {
+    position: absolute;
+    margin-top: 1px;
+	margin-left:750px;
+    display: none;
+	
+    width: 300px;
+    height:55px;
+	
+    clear: both;
+  
+    padding: 0 2% 2% 2%;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+	
+}
+
+#forgot-pass  {
+    position: absolute;
+    margin-top: 1px;
+	margin-left:900px;
+    display: none;
+	
+    width: 300px;
+    height:55px;
+	
+    clear: both;
+  
+    padding: 0 2% 2% 2%;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+	
+}
+
+
+
+.clearfix{*zoom:1;}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0;}
+.clearfix:after{clear:both;}
+.hide-text{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0;}
+.input-block-level{display:block;width:100%;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.btn-file{overflow:hidden;position:relative;vertical-align:middle;}.btn-file>input{position:absolute;top:0;right:0;margin:0;opacity:0;filter:alpha(opacity=0);transform:translate(-300px, 0) scale(4);font-size:23px;direction:ltr;cursor:pointer;}
+.fileupload{margin-bottom:9px;}.fileupload .uneditable-input{display:inline-block;margin-bottom:0px;vertical-align:middle;cursor:text;}
+.fileupload .thumbnail{overflow:hidden;display:inline-block;margin-bottom:5px;vertical-align:middle;text-align:center;}.fileupload .thumbnail>img{display:inline-block;vertical-align:middle;max-height:100%;}
+.fileupload .btn{vertical-align:middle;}
+.fileupload-exists .fileupload-new,.fileupload-new .fileupload-exists{display:none;}
+.fileupload-inline .fileupload-controls{display:inline;}
+.fileupload-new .input-append .btn-file{-webkit-border-radius:0 3px 3px 0;-moz-border-radius:0 3px 3px 0;border-radius:0 3px 3px 0;}
+.thumbnail-borderless .thumbnail{border:none;padding:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;}
+.fileupload-new.thumbnail-borderless .thumbnail{border:1px solid #ddd;}
+.control-group.warning .fileupload .uneditable-input{color:#a47e3c;border-color:#a47e3c;}
+.control-group.warning .fileupload .fileupload-preview{color:#a47e3c;}
+.control-group.warning .fileupload .thumbnail{border-color:#a47e3c;}
+.control-group.error .fileupload .uneditable-input{color:#b94a48;border-color:#b94a48;}
+.control-group.error .fileupload .fileupload-preview{color:#b94a48;}
+.control-group.error .fileupload .thumbnail{border-color:#b94a48;}
+.control-group.success .fileupload .uneditable-input{color:#468847;border-color:#468847;}
+.control-group.success .fileupload .fileupload-preview{color:#468847;}
+.control-group.success .fileupload .thumbnail{border-color:#468847;}
+
+
+a{ cursor: pointer;}
