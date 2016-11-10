@@ -20,7 +20,7 @@ if($row[0]!='') {
 	
 
 } else {
-    echo "<script>window.location='http://localhost/public_html/RMSCI/index.php';</script>";
+    echo "<script>window.location='http://rmsci.fc.ul.pt';</script>";
 	
 }
 
@@ -285,6 +285,7 @@ if (key == undefined) {
 	var key = 'public';
 }
 	
+var mod = [];
 function modalities() {
 						
 	$.ajax({
@@ -297,17 +298,26 @@ function modalities() {
 		success: function(data)   // A function to be called if request succeeds
 		{
 			
-			$('#s1').empty().append(data);
-			$("#s1").prepend("<option value='mod'>Choose the modality</option>");
 			
-			selects('s1').selectedIndex=0;
-			show_select();
+			if ($.inArray(data, mod)==-1) {
+				mod = [];
+				
+				$('#s1').empty().append(data);
+				$("#s1").prepend("<option value='mod'>Choose the modality</option>");
+			
+				selects('s1').selectedIndex=0;
+			
+				
+    			mod.push(data);
+			}
 			
 			
 			
 			
+		
 		}
 		});
+	setTimeout (modalities, 5000);
 	
 	
 }
@@ -324,32 +334,30 @@ function ajaxDelay() {
 	
 	$.ajax({
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CR/IADP',
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CR/IADP',
 		success: function (CRdata) {
 			
 			
+			if (CRdata!=null) {
+				if (CRdata.length!=CRlength) {
+					CRlength = CRdata.length;
+					show_select();
+				}
+			} 
+				
 			
-			if (CRlength == 0) {
-				
-				CRlength = CRdata.length;
-				
-			} if (CRlength==1) {
+			if (CRlength=='erro') {
 				
 				CRlength = CRdata.length;
 				show_select();
-				
-			} if (CRdata.length != CRlength) {
-				
-				CRlength = CRdata.length;
-				show_select();
-				
-				
 			}
+				
+			
 			
 		},
 		error: function(error) {
 			
-			CRlength = 1;
+			CRlength = 'erro';
 			
 		}
 
@@ -358,29 +366,25 @@ function ajaxDelay() {
 	
 	$.ajax({
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CT/DLP',
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CT/DLP',
 		success: function (CTdata) {
 			
-			if (CTlength == 0) {
-				CTlength = CTdata.length;
-			} if (CTlength==1) {
+			if (CTdata!=null) {
+				if (CTdata.length!=CTlength) {
+					CTlength = CTdata.length;
+					show_select();
+				}
+			} 
+			if (CTlength=='erro') {
 				
 				CTlength = CTdata.length;
 				show_select();
-				
-			} if (CTdata.length != CTlength) {
-				
-				
-				CTlength = CTdata.length;
-				show_select();
-				
 			}
-			
 			
 		},
 		error: function(error) {
 			
-			CTlength = 1;
+			CTlength = 'erro';
 		}
 
 
@@ -388,26 +392,25 @@ function ajaxDelay() {
 	
 	$.ajax({
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/MG/OrganDose',
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/MG/OrganDose',
 		success: function (MGdata) {
-			if (MGlength == 0) {
-				MGlength = MGdata.length;
-			} if (MGlength==1) {
+
+			if (MGdata!=null) {
+				if (MGdata.length!=MGlength) {
+					MGlength = MGdata.length;
+					show_select();
+				}
+			} 
+			if (MGlength=='erro') {
 				
 				MGlength = MGdata.length;
 				show_select();
-			}
-			if (MGdata.length != MGlength) {
-				
-				MGlength = MGdata.length;
-				show_select();
-				
 			}
 			
 			
 		},
 		error: function(error) {
-			MGlength = 1;
+			MGlength = 'erro';
 		}
 
 
@@ -418,6 +421,7 @@ function ajaxDelay() {
 
 	
 }
+
 
 
 
@@ -716,7 +720,7 @@ function getMGEquipments(data) {
 function getCR(par) {
 $.ajax({
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CR/' + par,
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CR/' + par,
 		success: function (CR) {
 			
 			chart = $('#chart').highcharts();
@@ -736,7 +740,7 @@ function getCRStats(par, stats) {
 $.ajax({
 		
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CR/' + par + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CR/' + par + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
                 '/' + Math.round(chart.xAxis[0].getExtremes().max) +'/' + chart.yAxis[0].getExtremes().min +'/' + chart.yAxis[0].getExtremes().max,
 		success: function (DAPStats) {
 			if (selects('avg').checked && stats =='AVG') {
@@ -866,7 +870,7 @@ function getCRBodypartStats(par, stats) {
 $.ajax({
 		
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key +'/CR/' + par + '/' + selects('s2').value + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key +'/CR/' + par + '/' + selects('s2').value + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
                 '/' + Math.round(chart.xAxis[0].getExtremes().max) +'/' + chart.yAxis[0].getExtremes().min +'/' + chart.yAxis[0].getExtremes().max,
 		success: function (CRBodyStats) {
 			if (selects('avg').checked && stats == 'AVG') {
@@ -1003,7 +1007,7 @@ function CRSeriesStats(par, stats) {
 $.ajax({
 		
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CR/' + par + '/' + selects('s2').value + '/' + selects('s5').value + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CR/' + par + '/' + selects('s2').value + '/' + selects('s5').value + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
                 '/' + Math.round(chart.xAxis[0].getExtremes().max) +'/' + chart.yAxis[0].getExtremes().min +'/' + chart.yAxis[0].getExtremes().max,
 		success: function (CRSeriesStats) {
 			if (selects('avg').checked && stats == 'AVG') {
@@ -1135,7 +1139,7 @@ function CREquipmentStats(par, stats) {
 $.ajax({
 		
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CR/' + par + '/' + selects('s2').value + '/' + selects('s5').value + '/' + selects('s4').value + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CR/' + par + '/' + selects('s2').value + '/' + selects('s5').value + '/' + selects('s4').value + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
                 '/' + Math.round(chart.xAxis[0].getExtremes().max) +'/' + chart.yAxis[0].getExtremes().min +'/' + chart.yAxis[0].getExtremes().max,
 		success: function (CREquipmentStats) {
 			if (selects('avg').checked && stats =='AVG') {
@@ -1264,7 +1268,7 @@ $.ajax({
 function getCRBodypart(par) {
 	return $.ajax({
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CR/' + par,
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CR/' + par,
 		success: function (CRBodypart) {
 			chart.series[3].setData([]);
 			chart.yAxis[0].removePlotLine('ref');
@@ -1281,7 +1285,7 @@ function getCRSeries(par) {
 	var chart = $('#chart').highcharts();
 	$.ajax({
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CR/' + par,
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CR/' + par,
 		success: function (CRSeries) {
 			chart.series[3].setData([]);
 			chart.series[1].setData(getSeriesDesc(CRSeries));
@@ -1296,7 +1300,7 @@ function getCREquipments(par) {
 	var chart = $('#chart').highcharts();
 	$.ajax({
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CR/' + par,
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CR/' + par,
 		success: function (CREquipment) {
 			
 			chart.series[1].setData(getCREquipment(CREquipment));
@@ -1319,7 +1323,7 @@ function getCT(par) {
 	$.ajax({
 		
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CT/' + par,
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CT/' + par,
 		success: function (CT) {
 			chart = $('#chart').highcharts();
 			
@@ -1345,7 +1349,7 @@ function getCTStats(par, stats) {
 $.ajax({
 		
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CT/' + par + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CT/' + par + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
                 '/' + Math.round(chart.xAxis[0].getExtremes().max) +'/' + chart.yAxis[0].getExtremes().min +'/' + chart.yAxis[0].getExtremes().max,
 		success: function (getCTStats) {
 			if (selects('avg').checked && stats == 'AVG') {
@@ -1437,7 +1441,7 @@ $.ajax({
 function getCTBodypart(par) {
 	$.ajax({
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CT/' + par,
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CT/' + par,
 		success: function (CTBodypart) {
 			chart.yAxis[0].removePlotLine('ref');
 			chart.series[3].setData([]);
@@ -1506,7 +1510,7 @@ function getCTBodypart(par) {
 function getCTEquipments(par) {
 	$.ajax({
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/CT/'+ par,
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CT/'+ par,
 		success: function (CTEquipment) {
 			switch (par) {
 				case 'DLP':
@@ -1533,7 +1537,7 @@ function getCTBodyPartStats(par, stats) {
 	$.ajax({
 		
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key +'/CT/' + par + '/' + selects('s2').value + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key +'/CT/' + par + '/' + selects('s2').value + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
                 '/' + Math.round(chart.xAxis[0].getExtremes().max) +'/' + chart.yAxis[0].getExtremes().min +'/' + chart.yAxis[0].getExtremes().max,
 		success: function (CTBodyPartStats) {
 			if (selects('avg').checked && stats == 'AVG') {
@@ -1629,7 +1633,7 @@ function getCTEquipmentStats(par, stats) {
 $.ajax({
 		
 		type: 'GET',
-		url:'http://localhost/public_html/webservice.php/' + key + '/CT/' + par + '/' + selects('s2').value + '/' + selects('s4').value + '/' + stats+ '/'+ Math.round(chart.xAxis[0].getExtremes().min) +
+		url:'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/CT/' + par + '/' + selects('s2').value + '/' + selects('s4').value + '/' + stats+ '/'+ Math.round(chart.xAxis[0].getExtremes().min) +
                 '/' + Math.round(chart.xAxis[0].getExtremes().max) +'/' + chart.yAxis[0].getExtremes().min +'/' + chart.yAxis[0].getExtremes().max,
 		success: function (CTEquipmentStats) {
 			
@@ -1731,7 +1735,7 @@ $.ajax({
 function getMGEquipment(par) {
 $.ajax({
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key +'/MG/' + par,
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key +'/MG/' + par,
 		success: function (MGEquipment) {
 			
 			switch (par) {
@@ -1763,7 +1767,7 @@ $.ajax({
 function getMGBodyThick() {
 $.ajax({
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/MG/OrganDose',
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/MG/OrganDose',
 		success: function (MG) {
 			chart = $('#chart').highcharts();
 			chart.series[3].setData([]);
@@ -1778,7 +1782,7 @@ $.ajax({
 function getMG(par) {
 $.ajax({
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/MG/'+ par,
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/MG/'+ par,
 		success: function (MG) {
 			var chart = $('#chart').highcharts();
 			
@@ -1840,7 +1844,7 @@ function getMGStats(par, stats) {
 $.ajax({
 		
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/MG/' + par + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/MG/' + par + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
                 '/' + Math.round(chart.xAxis[0].getExtremes().max) +'/' + chart.yAxis[0].getExtremes().min +'/' + chart.yAxis[0].getExtremes().max,
 		success: function (MGStats) {
 			if (selects('avg').checked && stats == 'AVG') {
@@ -2012,7 +2016,7 @@ function getMGThickavg() {
 $.ajax({
 		
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/MG/OrganDose/' + selects('s2').value + '/AVG/' + Math.round(chart.xAxis[0].getExtremes().min) +
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/MG/OrganDose/' + selects('s2').value + '/AVG/' + Math.round(chart.xAxis[0].getExtremes().min) +
                 '/' + Math.round(chart.xAxis[0].getExtremes().max) +'/' + chart.yAxis[0].getExtremes().min +'/' + chart.yAxis[0].getExtremes().max,
 		success: function (MGThickavg) {
 			if (selects('avg').checked) {
@@ -2045,7 +2049,7 @@ function getMGThcikper() {
 $.ajax({
 		
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/MG/OrganDose/' + selects('s2').value + '/PER/' + Math.round(chart.xAxis[0].getExtremes().min) +
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/MG/OrganDose/' + selects('s2').value + '/PER/' + Math.round(chart.xAxis[0].getExtremes().min) +
                 '/' + Math.round(chart.xAxis[0].getExtremes().max) +'/' + chart.yAxis[0].getExtremes().min +'/' + chart.yAxis[0].getExtremes().max,
 		success: function (MGThickper) {
 			if (selects('percentile').checked) {
@@ -2077,7 +2081,7 @@ function getMGEquipmentStats(par, stats) {
 $.ajax({
 		
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/MG/' + par + '/' + selects('s2').value + '/' + selects('s4').value + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/MG/' + par + '/' + selects('s2').value + '/' + selects('s4').value + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
                 '/' + Math.round(chart.xAxis[0].getExtremes().max) +'/' + chart.yAxis[0].getExtremes().min +'/' + chart.yAxis[0].getExtremes().max,
 		success: function (MGEquipmentStats) {
 			if (selects('avg').checked && stats =='AVG') {
@@ -2140,7 +2144,7 @@ function getMGEquipmentStats1(par, stats) {
 $.ajax({
 		
 		type: 'GET',
-		url: 'http://localhost/public_html/webservice.php/' + key + '/MG/' + par + '/' + selects('s4').value + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
+		url: 'http://rmsci.fc.ul.pt/tools/webservice.php/' + key + '/MG/' + par + '/' + selects('s4').value + '/' + stats + '/' + Math.round(chart.xAxis[0].getExtremes().min) +
                 '/' + Math.round(chart.xAxis[0].getExtremes().max) +'/' + chart.yAxis[0].getExtremes().min +'/' + chart.yAxis[0].getExtremes().max,
 		success: function (MGEquipmentStats) {
 			if (selects('avg').checked && stats =='AVG') {
@@ -3660,7 +3664,7 @@ document.getElementById("txtHint").style.background='#f1f1f1';
 			
 			$("#logout").click(function(){
 				
-				 window.location = "http://localhost/public_html/RMSCI/index.php";
+				 window.location = "http://rmsci.fc.ul.pt";
 					
 					
 			});
@@ -3720,7 +3724,7 @@ document.getElementById("txtHint").style.background='#f1f1f1';
 				
 				<input type=hidden name=st value=0>
 				<select style = 'float:left;margin-top:-2px;'class='soflow' name=country id='s1' onchange="selects('s3').selectedIndex=0; selects('s4').style.visibility ='hidden'; selects('s5').style.visibility ='hidden';selects('s2').style.visibility ='hidden';show_select();ajaxFunction('s1');">
-					
+					<option value='mod'>Choose the modality</option>
 					
 				</select>
 				</br>
