@@ -2,7 +2,7 @@
 header('content-type: application/json; charset=utf-8');
 header("access-control-allow-origin: *");
 
-include 'RMSCI/connect.php';
+include '../connect.php';
 include 'classes.php';
 
 include 'CT.php';
